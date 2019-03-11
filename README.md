@@ -1,5 +1,7 @@
 # Raspberry Cellular Router Project
-Build a cellular router with a Raspberry Pi Zero for the Internet of Things
+Build a cellular router with a Raspberry Pi Zero for the Internet of Things.
+
+This example uses a Telekom APN where you get a public IP address (IPv4 only) and can login remotely to your Raspberry Pi Zero.
 
 ## Installation of configuration files
 ```
