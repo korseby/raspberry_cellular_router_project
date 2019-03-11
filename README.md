@@ -308,8 +308,8 @@ persist
 noauth
 
 # Scripts to run
-connect "/usr/sbin/chat -v -f /etc/chatscripts/congstar-connect"
-disconnect "/usr/sbin/chat -v -f /etc/chatscripts/congstar-disconnect"
+connect "/usr/sbin/chat -v -f /etc/chatscripts/telekom-connect"
+disconnect "/usr/sbin/chat -v -f /etc/chatscripts/telekom-disconnect"
 ```
 
 ```
@@ -320,7 +320,7 @@ TIMEOUT 10
 ABORT 'BUSY'
 ABORT 'NO ANSWER'
 ABORT 'ERROR'
-SAY 'Starting Congstar connect script.\n'
+SAY 'Starting Telekom connect script.\n'
 
 ""'ATZ'
 SAY 'Setting APN\n'
