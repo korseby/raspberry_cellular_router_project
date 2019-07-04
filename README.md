@@ -24,7 +24,9 @@ This example uses a Telekom APN where you get a public IP address (IPv4 only) an
 /etc/vnstat.conf
 /var/spool/cron/crontabs/*
 /etc/iptables
+/etc/motion
 /etc/systemd/system/ip*
+/etc/default
 /var/lib/vnstat
 /root
 ```
@@ -56,7 +58,7 @@ NTP=time.euro.apple.com
 ## Packages installation
 ```
 apt-get update && apt-get dist-upgrade
-DEBIAN_FRONTEND=noninteractive apt-get -y install bash powertop curl wget ppp ncftp hexedit bchunk bzip2 rsync zip unzip mc e2fsprogs smartmontools ifstat iftop lsof htop nmap kismet geoip-bin geoip-database libnet-cidr-lite-perl libsexy2 iperf iperf3 mutt gnupg screen vim git ettercap-graphical usb-modeswitch ddclient ipcheck minicom vnstat make libnotify3.0-cil xtightvncviewer x11vnc ssvnc tightvncserver vnc4server leafpad conky xvfb xinit xterm xtermset xserver-xorg xutils xosview fluxbox blackbox openbox bbpager libdockapp3 asmon wmnet wmwave wmnd irssi transmission-gtk phantomjs lynx w3m gnome-keyring dillo midori xombrero firefox-esr chromium-browser xdotool p7zip unrar-free openjdk-8-jre ffmpeg r-base python-pip python3-pip autoconf automake libtool shtool intltool bison samba hfsutils python-bsddb3 python3-bsddb3 python-gdbm python3-gdbm python-sqlite python-tk python3-tk python-psycopg2 python3-psycopg2 python-mutagen python3-mutagen python-gobject python-gtk2 python-geoip python3-geoip python-geoip2 python3-geoip2 python-miniupnpc fail2ban python-selenium python3-selenium netatalk adwaita-icon-theme arc-theme libffi-dev libssl-dev gpicview
+DEBIAN_FRONTEND=noninteractive apt-get -y install bash powertop curl wget ppp ncftp hexedit bchunk bzip2 rsync zip unzip mc e2fsprogs smartmontools ifstat iftop lsof htop nmap kismet geoip-bin geoip-database libnet-cidr-lite-perl libsexy2 iperf iperf3 mutt gnupg screen vim git ettercap-graphical usb-modeswitch ddclient ipcheck minicom vnstat make libnotify3.0-cil xtightvncviewer x11vnc ssvnc tightvncserver vnc4server leafpad conky xvfb xinit xterm xtermset xserver-xorg xutils xosview fluxbox blackbox openbox bbpager libdockapp3 asmon wmnet wmwave wmnd irssi transmission-gtk phantomjs lynx w3m gnome-keyring dillo midori xombrero firefox-esr chromium-browser xdotool p7zip unrar-free openjdk-8-jre ffmpeg r-base python-pip python3-pip autoconf automake libtool shtool intltool bison samba hfsutils python-bsddb3 python3-bsddb3 python-gdbm python3-gdbm python-sqlite python-tk python3-tk python-psycopg2 python3-psycopg2 python-mutagen python3-mutagen python-gobject python-gtk2 python-geoip python3-geoip python-geoip2 python3-geoip2 python-miniupnpc fail2ban python-selenium python3-selenium netatalk adwaita-icon-theme arc-theme libffi-dev libssl-dev gpicview motion
 
 systemctl stop exim4.service
 systemctl disable exim4.service
@@ -414,6 +416,10 @@ vi /etc/iptables/iptables.rules
 -A INPUT   -p tcp -i wlan0 --sport 32768:65535 --dport 22 -m state --state NEW -j ACCEPT
 -A INPUT   -p tcp -i ppp0  --sport 32768:65535 --dport 22 -m state --state NEW -j ACCEPT
 
+# Web
+-A INPUT   -p tcp -i eth0  --sport 32768:65535 --dport 8080:8081 -m state --state NEW -j ACCEPT
+-A INPUT   -p tcp -i wlan0 --sport 32768:65535 --dport 8080:8081 -m state --state NEW -j ACCEPT
+
 # VNC
 -A INPUT   -p tcp -i eth0  --sport 32768:65535 --dport 5901 -m state --state NEW -j ACCEPT
 -A INPUT   -p tcp -i wlan0 --sport 32768:65535 --dport 5901 -m state --state NEW -j ACCEPT
@@ -458,6 +464,10 @@ vi /etc/iptables/ip6tables.rules
 -A INPUT   -p tcp -i eth0  --sport 32768:65535 --dport 22 -m state --state NEW -j ACCEPT
 -A INPUT   -p tcp -i wlan0 --sport 32768:65535 --dport 22 -m state --state NEW -j ACCEPT
 -A INPUT   -p tcp -i ppp0  --sport 32768:65535 --dport 22 -m state --state NEW -j ACCEPT
+
+# Web
+-A INPUT   -p tcp -i eth0  --sport 32768:65535 --dport 8080:8081 -m state --state NEW -j ACCEPT
+-A INPUT   -p tcp -i wlan0 --sport 32768:65535 --dport 8080:8081 -m state --state NEW -j ACCEPT
 
 # VNC
 -A INPUT   -p tcp -i eth0  --sport 32768:65535 --dport 5901 -m state --state NEW -j ACCEPT
